@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/features.css">
+<title>EcaKnowGames | Features</title>
+</head>
+<body>
+<!-- Navigation Bar -->
+<div class="sticky">
+    <div class="Navbar-container u-flex">
+        <div class="Navbar-titleBox">
+            <a href="../index.html">
+                <h1 class="Navbar-navTitle">Eca</h1>
+                <h1 class="Navbar-navTitle">Know</h1>
+                <h1 class="Navbar-navTitle">Games</h1>
+            </a>
+        </div>
+        <div class="section u-flex Navbar-menu">
+            <a class="Navbar-navTitle" href="../index.html"><div class="button Navbar-subContainer">Home</div></a>
+            <a class="Navbar-navTitle" href="./about.html"><div class="button Navbar-subContainer">About</div></a>
+            <a class="Navbar-navTitle" href="./apps.html"><div class="button Navbar-subContainer">Apps</div></a>
+            <a class="Navbar-navTitle" href="./features.html"><div class="button Navbar-subContainer u-underline">Features</div></a>
+        </div>
+    </div>
+</div>
+<!-- Page -->
+<div>
+    <div class="main u-textCenter u-position textOnImg" style="margin-top:70px">
+        <h1>EcaKnowGames</h1>
+        <p>select features</p>
+    </div>
+    <div class="MainFeatureBackground MainFeatureImg">
+        <div class="MainFeatureDescriptionBox">
+            <h3 class="MainFeaturePreTitle">Meet The Developer </h3>
+            <h1 class="MainFeatureTitle">Problem Solved</h1>
+            <p class="MainFeatureDescription">How 18-year-old Gabrielle Ecanow became a prolific app creator.</p>
+            <a class="MainFeatureDescription" href="https://itunes.apple.com/us/story/id1435962393" target="_blank" rel="noopener noreferrer">
+                Click here to read more.
+            </a>
+        </div>
+    </div>
+    <div class="centerSnug" id="features-container"></div>
+</div>
+<!-- Bottom Bar -->
+<div class="Bottombar-container">
+    <div class="Bottombar-subcontainer">
+        <a href="../index.html">
+            <h1 class="Navbar-navTitle">Eca</h1>
+            <h1 class="Navbar-navTitle">Know</h1>
+            <h1 class="Navbar-navTitle">Games</h1>
+        </a>
+        <p class="u-halfWidth Navbar-margin-left ">
+            EcaKnowGames is an app development company founded in 2015. 
+            Based in northern Illinois, the company focuses on creating all different kinds of apps. 
+            Be sure to stay tuned for EcaKnowGames' newest creations, coming soon to the app store! 
+            <a href="./about.html">Read More</a>
+        </p>
+        <div class="Bottombar-rowContainer">
+            <p class="Navbar-margin-left" id="copyright"></p>
+            <a class="Bottombar-link" href="">admin@ecaknowgames.com</a>
+        </div>
+    </div>
+    <script>
+        document.getElementById("copyright").textContent = `© ${new Date().getFullYear()} by EcaKnowGames`;
+    </script>
+</div>
+
+<!-- Inserting Feature Details Dynamically -->
+<script>
+    // Formats the feature descriptions
+    function formatFeature(article) {
+        let div = document.createElement("div");
+
+        div.classList = "ArticleContainer";
+        div.innerHTML = `
+            ${article.image ? `<img class="ArticleImg ${article.image}">\n` : ""}
+            <div class="ArticleDescriptionBox">
+                <a class="ArticleTitle" href=${article.href} target="_blank" rel="noopener noreferrer">
+                    ${article.title}
+                </a>
+                ${article.source && article.location ? `<p class="ArticleSource">${article.source}, <i>${article.location}</i></p>` : ""}
+                ${article.source && !article.location ? `<p class="ArticleSource">${article.source}</p>` : ""}
+                ${article.date ? `<p class="ArticleDate">${article.date}</p>` : ""}
+            </div>
+        `;
+
+        document.getElementById("features-container").append(div);
+    }
+
+    // ALL FEATURES DATA HERE
+    const features = [
+        {
+            href: "https://itunes.apple.com/us/story/id1435962393",
+            title: "Meet the Developer: Problem Solved",
+            source: "App Store Preview",
+            date: "October 22, 2018"
+        },
+        {
+            href: "https://www.refinery29.com/2018/06/200686/apple-wwdc-scholarship-winners",
+            title: "How 3 Teenage Women Created Apps Before Finishing High School & Earned Recognition From Apple",
+            source: "Refinery29",
+            date: "June 4, 2018"
+        },
+        {
+            href: "https://techcrunch.com/2018/06/04/student-developers-arrive-in-full-force-for-apples-wwdc/",
+            title: "Student developers arrive in full force for Apple's WWDC",
+            source: "TechCrunch",
+            date: "June 4, 2018"
+        },
+        {
+            href: "http://www.maclife.de/news/wwdc-2018-apple-ceo-tim-cook-zeigt-diesjaehrige-stipendiengewinner-100103282.html",
+            title: "WWDC 2018: Apple-CEO Tim Cook zeigt diesjährige Stipendiengewinner",
+            source: "MacLife",
+            date: "June 4, 2018"
+        },
+        {
+            href: "https://www.macrumors.com/2018/06/03/cook-video-wwdc-scholarship/",
+            title: "Apple CEO Tim Cook Shares Video of WWDC 2018 Scholarship Winners and Their Apps",
+            source: "MacRumors",
+            date: "June 3, 2018"
+        },
+        {
+            href: "https://appleinsider.com/articles/18/06/03/tim-cook-spends-time-with-scholarship-winners-ahead-of-wwdc",
+            title: "Tim Cook spends time with scholarship winners ahead of WWDC",
+            source: "AppleInsider",
+            date: "June 3, 2018"
+        },
+        {
+            href: "https://twitter.com/tim_cook/status/1003431084401442817",
+            title: "Read Apple CEO Tim Cook's tweet about meeting me and 7 other WWDC scholars!",
+            date: "June 3, 2018",
+            image: "Twitter"
+        },
+        {
+            href: "http://www.chicagotribune.com/ct-vhr-congressional-app-winner-tl-1228-20171229-story.html",
+            title: "Learn about our newest app, Study Buddy Connection, and how it won 2nd place in the Congressional App Challenge!",
+            source: "ChicagoTribune",
+            date: "December 29, 2017"
+        },
+        {
+            href: "https://vulcanpost.com/612559/apple-wwdc-scholars/",
+            title: "From 10 to 82, These App Developers We Met At WWDC Prove That Age Is Just A Number",
+            source: "Vulcan Post",
+            date: "June 13, 2017"
+        },
+        {
+            href: "http://www.bild.de/digital/multimedia/ios/nachwuchsentwickler-wwdc-52111094.bild.html",
+            title: "APPLES NACHWUCHS-ENTWICKLER - Apple's Youth Developers",
+            source: "Bild",
+            location: "Germany",
+            date: "June 9, 2017"
+        },
+        {
+            href: "https://www.khaleejtimes.com/youre-never-too-young---or-too-old---to-develop-apps",
+            title: "You're never too young - or too old - to develop apps",
+            source: "Khaleej Times",
+            location: "Dubai",
+            date: "June 7, 2017"
+        }
+    ];
+
+    // format according to each feature's data!
+    features.forEach(feature => {
+        formatFeature(feature);
+    });
+</script>
+</body>
+</html>

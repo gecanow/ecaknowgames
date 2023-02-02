@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/apps.css">
+<link rel="stylesheet" href="../css/warning.css">
+<title>EcaKnowGames | Apps</title>
+</head>
+<body>
+<!-- Navigation Bar -->
+<div class="sticky">
+    <div class="Navbar-container u-flex">
+        <div class="Navbar-titleBox">
+            <a href="../index.html">
+                <h1 class="Navbar-navTitle">Eca</h1>
+                <h1 class="Navbar-navTitle">Know</h1>
+                <h1 class="Navbar-navTitle">Games</h1>
+            </a>
+        </div>
+        <div class="section u-flex Navbar-menu">
+            <a class="Navbar-navTitle" href="../index.html"><div class="button Navbar-subContainer">Home</div></a>
+            <a class="Navbar-navTitle" href="./about.html"><div class="button Navbar-subContainer">About</div></a>
+            <a class="Navbar-navTitle" href="./apps.html"><div class="button Navbar-subContainer u-underline">Apps</div></a>
+            <a class="Navbar-navTitle" href="./features.html"><div class="button Navbar-subContainer">Features</div></a>
+        </div>
+    </div>
+</div>
+<!-- Page -->
+<div>
+    <!-- Warning -->
+    <div class="WarningContainer" id="warning-container">
+        <h2 class="WarningText">⛔️ Note ⛔️</h2>
+        <hr>
+        <p>
+            Due to recent iOS updates, many apps are currently being updated and will be re-released shortly. 
+            We apologize for any inconvenience.
+        </p>
+        <a onclick="toggleWarning(false)">Ok</a>
+    </div>
+    <div class="WarningContainer" style="display:none;" id="hidden-warning-container">
+        <h2 class="WarningText">⛔️</h2>
+        <hr>
+        <a onclick="toggleWarning(true)">Show</a>
+    </div>
+    <script>
+        function toggleWarning(show) {
+            document.getElementById("warning-container").style.display = show ? "block" : "none";
+            document.getElementById("hidden-warning-container").style.display = show ? "none" : "block";
+        }
+    </script>
+    <!-- Content -->
+    <div class="WorkStation HomeViewParallax SmallCover">
+        <div class="main u-textCenter u-position textOnImg">
+            <div class="CenterTitle">
+                <h1>EcaKnowGames</h1>
+            <p>featured apps</p>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="AppsContainer" id="apps-container"></div>
+        <div id="apps-detail-container"></div>
+    </div>
+    <div class="CenterContent WorkStation HomeViewParallax XSmallCover">
+        <a class="AppStoreLink" href="https://itunes.apple.com/us/developer/ecaknowgames-llc/id1029592340" target="_blank" rel="noopener noreferrer">Visit EcaKnowGames on the App Store</a>
+    </div>
+</div>
+<!-- Bottom Bar -->
+<div class="Bottombar-container">
+    <div class="Bottombar-subcontainer">
+        <a href="../index.html">
+            <h1 class="Navbar-navTitle">Eca</h1>
+            <h1 class="Navbar-navTitle">Know</h1>
+            <h1 class="Navbar-navTitle">Games</h1>
+        </a>
+        <p class="u-halfWidth Navbar-margin-left ">
+            EcaKnowGames is an app development company founded in 2015. 
+            Based in northern Illinois, the company focuses on creating all different kinds of apps. 
+            Be sure to stay tuned for EcaKnowGames' newest creations, coming soon to the app store! 
+            <a href="./about.html">Read More</a>
+        </p>
+        <div class="Bottombar-rowContainer">
+            <p class="Navbar-margin-left" id="copyright"></p>
+            <a class="Bottombar-link" href="">admin@ecaknowgames.com</a>
+        </div>
+    </div>
+    <script>
+        document.getElementById("copyright").textContent = `© ${new Date().getFullYear()} by EcaKnowGames`;
+    </script>
+</div>
+
+<!-- Inserting App Details Dynamically -->
+<script>
+    // Handles a click on an app icon
+    // Hides / shows the app details
+    function appClick(app_id) {
+        let appDetailView = document.getElementById(`${app_id}-detail`);
+        const curr_display = appDetailView.style.display;
+        
+        // show all descriptions just in case
+        document.querySelectorAll('[id$="-detail"]').forEach((caret) => {
+            caret.style.display = "none";
+        });
+
+        // reveal / hide the app description
+        appDetailView.style.display = (curr_display === "block") ? "none" : "block";
+
+        // hide all caret pointers just in case
+        document.querySelectorAll('[id$="-caret"]').forEach((caret) => {
+            caret.style.visibility = "hidden";
+        });
+
+        // reveal / hide the caret pointer
+        const output_caret = (curr_display === "block") ? "hidden" : "visible";
+        document.getElementById(`${app_id}-caret`).style.visibility = output_caret;
+
+        // scroll to show the entire app detail view 
+        appDetailView.scrollIntoView({behavior: "smooth", block: "end"});
+    }
+
+    // Formats the app icon buttons
+    function formatApp(app) {
+        let div = document.createElement("div");
+        div.innerHTML = `
+        <div class="bubbleIcon">
+            <a onclick="appClick('${app.id}')" id="${app.id}-icon">
+                <p class="IconNameView">${app.name}</p>
+                <div class="IconView ${app.style_id}Icon"></div>
+            </a>
+        </div>
+        <div class="invisible" id="${app.id}-caret">
+            <div class="caret up"></div>
+        </div>
+        `;
+
+        document.getElementById("apps-container").append(div);
+    }
+    
+    // Formats the app descriptions, which are initially hidden
+    function formatAppDetail(app) {
+        let div = document.createElement("div");
+
+        div.id = `${app.id}-detail`;
+        div.style.display = "none";
+        div.innerHTML = `
+        <div class="AppContainer ${app.style_id}Color">
+            <img class="AppImgView" src="../img/backgrounds/${app.id}-scroll-pic.png">
+            <div style="padding:10px;">
+                <p class="appName">${app.name}</p>
+                <hr class="smallBar">
+                <p class="appDescription">${app.description}</p>
+                <a href="${app.link}" target="_blank" rel="noopener noreferrer">
+                    <p class="appDescription">View ${app.name} in the App Store</p>
+                </a>
+            </div>
+        </div>
+        `;
+
+        document.getElementById("apps-detail-container").append(div);
+    }
+
+    // ALL APP DATA HERE
+    const apps = [
+        {
+            id: "player_x2",
+            name: "Player X2",
+            style_id: "AI",
+            description: "Player X2 is an artificial intelligence game room that allows you to play Tic Tac Toe or 4-In-A-Row against a friend or against the computer. Happy playing!",
+            link: "https://itunes.apple.com/us/app/player-x2/id1411798778?mt=8",
+        },
+        {
+            id: "gas_laws",
+            name: "The Gas Laws",
+            style_id: "GasLaws",
+            description: "A demonstration of the Chemistry gas laws. Never get confused by PV=nRT again! Just move the sliders to observe the relationship between pressure, volume, moles, and temperature of gases.",
+            link: "https://itunes.apple.com/us/app/the-gas-laws/id1104714758?mt=8",
+        },
+        {
+            id: "magic_order",
+            name: "Magic Order",
+            style_id: "Magic",
+            description: "Tap the balls in order of their numbers as they pop up on the screen. Be sure to tap on them before they fall back down, or you lose! ",
+            link: "https://itunes.apple.com/us/app/magic-order/id1032968473?mt=8",
+        },
+        {
+            id: "red_treasure",
+            name: "Red Treasure",
+            style_id: "Red",
+            description: "Dodge the bullets while collecting gold and red treasure! Move left by tapping on the left side of the screen and move right by tapping on the right side.",
+            link: "https://itunes.apple.com/us/app/red-treasure/id1029592341?mt=8",
+        },
+        {
+            id: "photo_picasso",
+            name: "Photo Picasso",
+            style_id: "Photo",
+            description: "Have you ever wanted to add your own drawings and designs directly onto photos from your photo library? Well, now you can!",
+            link: "https://itunes.apple.com/us/app/photo-picasso/id1168333440?mt=8",
+        },
+        {
+            id: "rsb_ttt",
+            name: "RoShamBo TicTacToe",
+            style_id: "TTT",
+            description: "Get ready to challenge friends in the classic games of TicTacToe and RoShamBo! Connect with nearby friends using bluetooth by simply clicking on their display name, and challenge them in real-time to a game of tic tac toe or rock paper scissors (roshambo).",
+            link: "https://itunes.apple.com/us/app/roshambo-tictactoe/id1200351161?mt=8",
+        },
+        {
+            id: "cj_schedule",
+            name: "CJ Schedule",
+            style_id: "CJ",
+            description: "Are you a student at Rochelle Zell? Use this easy, personalized organizer for your CJ Schedule! ",
+            link: "https://itunes.apple.com/us/app/cj-schedule/id1041740992?mt=8",
+        }
+    ];
+
+    // format according to each app's data!
+    apps.forEach(app => {
+        formatApp(app);
+        formatAppDetail(app);
+    });
+</script>
+</body>
+</html>
+
